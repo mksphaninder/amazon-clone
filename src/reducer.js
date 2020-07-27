@@ -1,37 +1,22 @@
 export const initialState = {
-  basket: [
-    {
-      id: "134141414",
-      title: "Apple ipad pro",
-      price: 598.98,
-      rating: 4,
-      image:
-        "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-12-select-wifi-spacegray-202003?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1583552356577",
-    },
-    {
-        id: "134141414",
-        title: "Apple ipad pro",
-        price: 598.98,
-        rating: 4,
-        image:
-          "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-12-select-wifi-spacegray-202003?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1583552356577",
-      },
-      {
-        id: "134141414",
-        title: "Apple ipad pro",
-        price: 598.98,
-        rating: 4,
-        image:
-          "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-12-select-wifi-spacegray-202003?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1583552356577",
-      },
-  ],
+  basket: [],
   user: null,
 };
+
+export const getBasketTotal = (basket) => basket?.reduce((amount, item) => item.price + amount, 0);
+
 
 function reducer(state, action) {
   console.log(action);
 
   switch (action.type) {
+    
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user
+      };
+
     case "ADD_TO_BASKET":
       // LOGIC OF ADDING ITEM TO BASKET
       return {
@@ -42,7 +27,7 @@ function reducer(state, action) {
     case "REMOVE_FROM_BASKET":
       // Logic to remove form basket
       let newBasket = [...state.basket];
-
+    //   
       const index = state.basket.findIndex((basketItem) => basketItem.id === action.id)
 
       if(index >= 0) {
